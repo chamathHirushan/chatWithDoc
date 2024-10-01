@@ -46,7 +46,7 @@ def get_vector_store(text_chunks):
 
 def get_conversational_chain():
     prompt_template = """
-    Answer the question as detailed as possinle from the provided context, make sure to provide all the details, 
+    Answer the question as detailed as possible from the provided context, make sure to provide all the details, 
     if the answer is not in provided context just say, "answer is not available in the context", don't provide any wrong answers\n\n
     
     Context :\n {context}?\n
@@ -72,10 +72,14 @@ def user_input(user_question):
     # load stored vector index from the local
     new_db = FAISS.load_local(
         "faiss_index", embeddings, allow_dangerous_deserialization=True)
+
+    # Perform a similarity search and returns a list of documents (or document chunks) that are most similar to the user's query
     docs = new_db.similarity_search(user_question)
 
+    # Get the conversational chain (LLM-based question-answering logic)
     chain = get_conversational_chain()
 
+    # Process the user question and return relevant outputs from the docs
     response = chain(
         {"input_documents": docs, "question": user_question},
         return_only_outputs=True
