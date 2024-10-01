@@ -6,7 +6,7 @@ import os
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import google.generativeai as genai
 
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
@@ -38,8 +38,9 @@ def get_text_chunks(text):
 
 def get_vector_store(text_chunks):
     '''vectorize the given chunks and store it in local'''
-    embeddings = GoogleGenerativeAIEmbeddings(model='models/embeddings-001')
-    vector_store = FAISS.from_texts(text_chunks, embeddings=embeddings)
+    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001')
+    vector_store = FAISS.from_texts(
+        text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
 
@@ -66,10 +67,11 @@ def get_conversational_chain():
 
 
 def user_input(user_question):
-    embeddings = GoogleGenerativeAIEmbeddings(model='models/embeddings-001')
+    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001')
 
     # load stored vector index from the local
-    new_db = FAISS.load_local("faiss_index", embeddings)
+    new_db = FAISS.load_local(
+        "faiss_index", embeddings, allow_dangerous_deserialization=True)
     docs = new_db.similarity_search(user_question)
 
     chain = get_conversational_chain()
@@ -95,7 +97,7 @@ def main():
     with st.sidebar:
         st.title("Menu")
         pdf_docs = st.file_uploader(
-            "Upload you PDF and click submit to proceed")
+            "Upload your PDF(s)", type="pdf", accept_multiple_files=True)
         if st.button("Submit"):
             raw_text = get_pdf_text(pdf_docs)
             text_chunks = get_text_chunks(raw_text)
