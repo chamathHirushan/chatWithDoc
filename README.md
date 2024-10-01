@@ -21,6 +21,8 @@ This repository contains a chatbot built using the LangChain framework, Google G
    ```bash
    pip install -r requirements.txt
 
+3. **Create a** .env **file inside the project folder and define your** GOOGLE_API_KEY **on it**
+
 3. **Run the application using Streamlit**
 
    ```bash
