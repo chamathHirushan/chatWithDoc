@@ -16,14 +16,23 @@ This repository contains a chatbot built using the LangChain framework, Google G
    git clone https://github.com/chamathHirushan/chatWithDoc.git
    cd chatWithDoc
 
-2. **Install the required dependencies**
+2. **Create a conda virtual env**
+   ```bash
+   conda create -p venv python=3.9
+  
+3. **Activate it**
+   
+   ```bash
+    conda activate venv/ 
+
+4. **Install the required dependencies**
 
    ```bash
    pip install -r requirements.txt
 
-3. **Create a** .env **file inside the project folder and define your** GOOGLE_API_KEY **on it**
+5. **Create a** .env **file inside the project folder and define your** GOOGLE_API_KEY **on it**
 
-3. **Run the application using Streamlit**
+6. **Run the application using Streamlit**
 
    ```bash
    streamlit run app.py
