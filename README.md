@@ -1,4 +1,4 @@
-# Chatbot using LangChain, Google Gemini API, Streamlit, and Facebook AI Similarity Tool
+# A RAG powered Chatbot using LangChain, Google Gemini API, Streamlit, and Facebook AI Similarity Tool
 
 This repository contains a chatbot built using the LangChain framework, Google Gemini API, Streamlit, and Facebook AI Similarity Tool.
 
