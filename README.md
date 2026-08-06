@@ -42,4 +42,6 @@ This repository contains a chatbot built using the LangChain framework, Google G
 Upload the PDFs you want to chat with.
 After receiving a success message, you can start chatting with the chatbot using the knowledge extracted from your PDF
 
- **Happy Chatting...!**
+<hr/>
+
+Built in 2024, at a time when tools for interacting and understanding research papers were still limited, this project aims to make research papers more accessible through conversational AI.
